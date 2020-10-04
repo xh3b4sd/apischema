@@ -45,17 +45,18 @@ jobs:
           ssh-agent -a ${SSH_AUTH_SOCK} > /dev/null
           chmod 0600 .github/asset/xh3b4sd/gocode/id_rsa
           ssh-add .github/asset/xh3b4sd/gocode/id_rsa
-          
-      - name: Setup Git Config
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git remote set-url origin git@github.com:xh3b4sd/gocode.git
 
       - name: Clone Go Code
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: git clone git@github.com:xh3b4sd/gocode.git "${{ runner.temp }}/xh3b4sd/gocode/"
+
+      - name: Setup Git Config
+        run: |
+          cd "${{ runner.temp }}/xh3b4sd/gocode/"
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git remote set-url origin git@github.com:xh3b4sd/gocode.git
 
       - name: Generate Go Code
         run: |
