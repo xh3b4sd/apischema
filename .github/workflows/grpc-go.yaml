@@ -2,7 +2,7 @@
 # Do not edit. This file was generated via the "workflow" command line tool.
 # More information about the tool can be found at github.com/xh3b4sd/workflow.
 #
-#     workflow generate grpc
+#     workflow generate grpcgo
 #
 
 name: gprc-go
@@ -10,10 +10,10 @@ name: gprc-go
 on:
   push:
     branches:
-      - main
-      - master
+      - "main"
+      - "master"
     paths:
-      - '**.proto'
+      - "**.proto"
 
 jobs:
   grpc-go:
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Go Env
         uses: actions/setup-go@v2
         with:
-          go-version: '1.15.2'
+          go-version: "1.15.2"
 
       - name: Install Protoc Binary
         working-directory: ${{ runner.temp }}
@@ -37,9 +37,9 @@ jobs:
 
       - name: Install gRPC Dependencies
         run: |
-          go get -u google.golang.org/protobuf/cmd/protoc-gen-go
+          go get -u google.golang.org/protobuf/cmd/protoc-gen-go@v1.25.0
           go install google.golang.org/protobuf/cmd/protoc-gen-go
-          go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
+          go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.0.1
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
       - name: Decrypt Private Key
