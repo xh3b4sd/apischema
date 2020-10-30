@@ -72,13 +72,16 @@ jobs:
       - name: Generate Go Code
         run: |
           go get github.com/xh3b4sd/pag
+          rm -rf ${{ runner.temp }}/xh3b4sd/gocode/pkg/
           pag generate golang -d ${{ runner.temp }}/xh3b4sd/gocode/pkg/
 
       - name: Go Mod Tidy
         working-directory: "${{ runner.temp }}/xh3b4sd/gocode/"
         run: |
-          rm -f go.sum
-          go mod tidy
+          if [[ -e go.sum ]]; then
+            rm -f go.sum
+            go mod tidy
+          fi
 
       - name: Commit And Push
         env:
