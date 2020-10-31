@@ -72,7 +72,7 @@ jobs:
 
       - name: Generate Ts Code
         run: |
-          go get github.com/xh3b4sd/pag
+          go get github.com/xh3b4sd/pag@308c865218ee4f261bddbcb15a7fcfeb8a09e694
           rm -rf ${{ runner.temp }}/xh3b4sd/tscode/pkg/
           pag generate typescript -d ${{ runner.temp }}/xh3b4sd/tscode/pkg/
 
